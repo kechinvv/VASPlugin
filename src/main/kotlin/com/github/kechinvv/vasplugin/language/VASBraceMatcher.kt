@@ -1,6 +1,6 @@
 package com.github.kechinvv.vasplugin.language
 
-import com.github.kechinvv.vasplugin.gen.VASCLexer
+import gen.VASCLexer
 import com.github.kechinvv.vasplugin.language.VASParserDefinition.OriginalRules.tokens
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher

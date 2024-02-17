@@ -1,7 +1,8 @@
 package com.github.kechinvv.vasplugin.language
 
-import com.github.kechinvv.vasplugin.gen.VASCLexer
-import com.github.kechinvv.vasplugin.gen.VASCParser
+
+import gen.VASCLexer
+import gen.VASCParser
 import com.github.kechinvv.vasplugin.language.psi.PsiElementFactory
 import com.github.kechinvv.vasplugin.language.psi.VASPSIFileRoot
 import com.intellij.lang.ASTNode
@@ -74,6 +75,10 @@ class VASParserDefinition : ParserDefinition {
 
     override fun getCommentTokens(): TokenSet {
         return COMMENTS
+    }
+
+    override fun getWhitespaceTokens(): TokenSet {
+        return WHITESPACE
     }
 
     override fun getStringLiteralElements(): TokenSet {

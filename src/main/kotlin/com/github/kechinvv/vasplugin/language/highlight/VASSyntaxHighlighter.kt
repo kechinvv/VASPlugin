@@ -1,7 +1,7 @@
 package com.github.kechinvv.vasplugin.language.highlight
 
-import com.github.kechinvv.vasplugin.gen.VASCLexer
-import com.github.kechinvv.vasplugin.gen.VASCParser
+import gen.VASCLexer
+import gen.VASCParser
 import com.github.kechinvv.vasplugin.language.VASLanguage
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
