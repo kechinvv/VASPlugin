@@ -2,6 +2,8 @@ package com.github.kechinvv.vasplugin.language
 
 import com.github.kechinvv.vasplugin.gen.VASCLexer
 import com.github.kechinvv.vasplugin.gen.VASCParser
+import com.github.kechinvv.vasplugin.language.psi.PsiElementFactory
+import com.github.kechinvv.vasplugin.language.psi.VASPSIFileRoot
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser
@@ -21,21 +23,22 @@ import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor
 import org.antlr.v4.runtime.Parser
 import org.antlr.v4.runtime.tree.ParseTree
 
-class VASParserDefenition : ParserDefinition {
+class VASParserDefinition : ParserDefinition {
 
     val FILE = IFileElementType(VASLanguage)
 
-    var tokens: List<TokenIElementType>? = null
-    var rules: List<RuleIElementType>? = null
-
+    object OriginalRules {
+        var tokens: List<TokenIElementType>? = emptyList()
+        var rules: List<RuleIElementType>? = emptyList()
+    }
 
     init {
         PSIElementTypeFactory.defineLanguageIElementTypes(
             VASLanguage,
             VASCParser.tokenNames, VASCParser.ruleNames
         );
-        tokens = PSIElementTypeFactory.getTokenIElementTypes(VASLanguage);
-        rules = PSIElementTypeFactory.getRuleIElementTypes(VASLanguage);
+        OriginalRules.tokens = PSIElementTypeFactory.getTokenIElementTypes(VASLanguage);
+        OriginalRules.rules = PSIElementTypeFactory.getRuleIElementTypes(VASLanguage);
     }
 
     val COMMENTS = PSIElementTypeFactory.createTokenSet(
@@ -77,11 +80,11 @@ class VASParserDefenition : ParserDefinition {
         return STRING
     }
 
-    override fun createElement(node: ASTNode?): PsiElement {
-        TODO("Not yet implemented")
+    override fun createElement(node: ASTNode): PsiElement {
+        return PsiElementFactory.createElement(node)
     }
 
     override fun createFile(viewProvider: FileViewProvider): PsiFile {
-        TODO("Not yet implemented")
+        return VASPSIFileRoot(viewProvider)
     }
 }

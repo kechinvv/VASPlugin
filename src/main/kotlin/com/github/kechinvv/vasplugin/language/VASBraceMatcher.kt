@@ -1,15 +1,16 @@
 package com.github.kechinvv.vasplugin.language
 
 import com.github.kechinvv.vasplugin.gen.VASCLexer
+import com.github.kechinvv.vasplugin.language.VASParserDefinition.OriginalRules.tokens
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IElementType
 
 class VASBraceMatcher : PairedBraceMatcher {
-    var PAIRS = arrayOf<BracePair>(
-        BracePair(tokens.get(VASCLexer.L_BRACKET), tokens.get(VASCLexer.R_BRACKET), true),
-        BracePair(tokens.get(VASCLexer.L_SQUARE_BRACKET), tokens.get(VASCLexer.R_SQUARE_BRACKET), true)
+    var PAIRS = arrayOf(
+        BracePair(tokens!![VASCLexer.L_BRACKET], tokens!![VASCLexer.R_BRACKET], true),
+        BracePair(tokens!![VASCLexer.L_SQUARE_BRACKET], tokens!![VASCLexer.R_SQUARE_BRACKET], true)
     )
 
     override fun getPairs(): Array<BracePair> {

@@ -10,6 +10,20 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.kechinvv.vasplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <lang.braceMatcher
+                language="VAS"
+                implementationClass="com.github.kechinvv.vasplugin.language.VASBraceMatcher"/>
+        <fileType
+                name="VAS"
+                implementationClass="com.github.kechinvv.vasplugin.language.VASFileType"
+                fieldName="INSTANCE"
+                language="VAS"
+                extensions="vas"/>
+        <lang.parserDefinition language="VAS"
+                               implementationClass="com.github.kechinvv.vasplugin.language.VASParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="VAS"
+                implementationClass="com.github.kechinvv.vasplugin.language.highlight.VASSyntaxHighlighterFactory"/>
     </extensions>
 
     <applicationListeners>

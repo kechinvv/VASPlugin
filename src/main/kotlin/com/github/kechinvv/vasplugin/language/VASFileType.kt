@@ -5,7 +5,7 @@ import javax.swing.Icon
 
 object VASFileType : LanguageFileType(VASLanguage) {
     override fun getName(): String {
-        return "VAS file"
+        return "VAS"
     }
 
     override fun getDescription(): String {
