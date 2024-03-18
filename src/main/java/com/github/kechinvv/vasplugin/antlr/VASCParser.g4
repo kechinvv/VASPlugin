@@ -11,13 +11,9 @@ program
     ;
 
 classDeclaration
-    : CLASS NL* identifier NL*
-      (EXTENDS NL* identifier)? NL*
+    : CLASS NL* IDENTIFIER NL*
+      (EXTENDS NL* IDENTIFIER)? NL*
       IS NL* (memberDeclaration NL*)*  END NL*
-    ;
-
-identifier
-    : IDENTIFIER
     ;
 
 listType
@@ -39,11 +35,20 @@ memberDeclaration
     ;
 
 variableDeclaration
+    : uninitializedVariable
+    | initializedVariable
+    ;
+    
+initializedVariable
     : VAR IDENTIFIER COLON NL* expression
+    ;
+    
+uninitializedVariable
+    : VAR IDENTIFIER type
     ;
 
 methodDeclaration
-    : METHOD IDENTIFIER NL* parameters? NL* (COLON IDENTIFIER)? NL* IS NL* body NL* END
+    : METHOD IDENTIFIER NL* parameters? NL* type? NL* IS NL* body NL* END
     ;
 
 parameters
@@ -55,7 +60,7 @@ parameters
     ;
 
 parameterDeclaration
-    : IDENTIFIER COLON NL* className
+    : IDENTIFIER type
     ;
 
 body
@@ -122,8 +127,12 @@ primary
     | NULL
     ;
 
+type
+    : COLON NL* className
+    ;
+    
 className
-    : identifier
+    : IDENTIFIER
     | arrayType
     | listType
     ;
