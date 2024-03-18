@@ -54,6 +54,10 @@ LIST
     : 'List'
     ;
 
+THIS
+    : 'this'
+    ;
+
 ARRAY
     : 'Array'
     ;
