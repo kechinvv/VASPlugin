@@ -48,14 +48,12 @@ uninitializedVariable
     ;
 
 methodDeclaration
-    : METHOD IDENTIFIER NL* (parameters)? NL* type? NL* IS NL* body NL* END
+    : METHOD IDENTIFIER NL* parameters? NL* type? NL* IS NL* body NL* END
     ;
 
 parameters
     : L_BRACKET NL*
-      ((parameterDeclaration NL*
-      (NL* COMMA NL* parameterDeclaration NL*)*)
-      | )
+      (parameterDeclaration NL* (COMMA NL* parameterDeclaration NL*)*)?
       R_BRACKET
     ;
 
