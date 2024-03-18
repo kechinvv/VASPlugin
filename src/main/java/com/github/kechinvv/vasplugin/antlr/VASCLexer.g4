@@ -118,7 +118,7 @@ COMMENT
     ;
 
 WS
-    : [\u0020\u0009\u000C] -> channel(HIDDEN)
+    : [\u0020\u0009\u000C]+ -> channel(HIDDEN)
     ;
 
 NL

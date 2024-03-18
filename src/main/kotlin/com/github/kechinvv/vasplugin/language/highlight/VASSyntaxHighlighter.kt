@@ -54,6 +54,8 @@ class VASSyntaxHighlighter : SyntaxHighlighterBase() {
             VASCLexer.SUPER, VASCLexer.RETURN,
             VASCLexer.TRUE, VASCLexer.FALSE -> KEYWORD
 
+            VASCLexer.STRING -> STRING
+
             VASCLexer.COMMENT -> LINE_COMMENT
 
             VASCLexer.MlComment -> BLOCK_COMMENT

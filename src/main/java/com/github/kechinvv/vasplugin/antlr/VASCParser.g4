@@ -48,7 +48,7 @@ uninitializedVariable
     ;
 
 methodDeclaration
-    : METHOD IDENTIFIER NL* parameters? NL* type? NL* IS NL* body NL* END
+    : METHOD IDENTIFIER NL* (parameters)? NL* type? NL* IS NL* body NL* END
     ;
 
 parameters
