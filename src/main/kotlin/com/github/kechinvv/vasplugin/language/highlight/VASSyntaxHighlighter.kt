@@ -50,7 +50,8 @@ class VASSyntaxHighlighter : SyntaxHighlighterBase() {
             VASCLexer.METHOD, VASCLexer.WHILE,
             VASCLexer.LOOP, VASCLexer.IS, VASCLexer.END,
             VASCLexer.IF, VASCLexer.THEN, VASCLexer.ELSE,
-            VASCLexer.VAR, VASCLexer.THIS,
+            VASCLexer.VAR, VASCLexer.THIS, VASCLexer.NULL,
+            VASCLexer.SUPER, VASCLexer.RETURN,
             VASCLexer.TRUE, VASCLexer.FALSE -> KEYWORD
 
             VASCLexer.COMMENT -> LINE_COMMENT
