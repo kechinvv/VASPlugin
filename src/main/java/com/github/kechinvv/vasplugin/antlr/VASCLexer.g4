@@ -50,6 +50,22 @@ RETURN
     : 'return'
     ;
 
+LIST
+    : 'List'
+    ;
+
+ARRAY
+    : 'Array'
+    ;
+
+PRINT
+    : 'println'
+    ;
+
+SUPER
+    : 'super'
+    ;
+
 IF
     : 'if'
     ;
@@ -66,16 +82,20 @@ VAR
     : 'var'
     ;
 
-THIS
-    : 'this'
-    ;
-
 TRUE
     : 'true'
     ;
 
 FALSE
     : 'false'
+    ;
+
+NULL
+    : 'null'
+    ;
+
+STRING
+    : '"' .*? '"'
     ;
 
 IDENTIFIER
