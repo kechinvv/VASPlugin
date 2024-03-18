@@ -17,11 +17,19 @@ classDeclaration
     ;
 
 identifier
-    : IDENTIFIER type?
+    : IDENTIFIER
     ;
 
-type
-    : NL* L_SQUARE_BRACKET NL* IDENTIFIER type? R_SQUARE_BRACKET NL*
+listType
+    : LIST genericType
+    ;
+
+arrayType
+    : ARRAY genericType
+    ;
+
+genericType
+    : NL* L_SQUARE_BRACKET NL* className R_SQUARE_BRACKET NL*
     ;
 
 memberDeclaration
@@ -47,7 +55,7 @@ parameters
     ;
 
 parameterDeclaration
-    : IDENTIFIER COLON NL* identifier
+    : IDENTIFIER COLON NL* className
     ;
 
 body
@@ -69,6 +77,11 @@ statement
     | ifStatement
     | returnStatement
     | expression
+    | print
+    ;
+
+print
+    : PRINT L_BRACKET STRING R_BRACKET
     ;
 
 assignment
@@ -88,19 +101,31 @@ returnStatement
     ;
 
 expression
-    : primary arguments? (NL* DOT IDENTIFIER NL* arguments?)*
+    : callable arguments? (NL* DOT IDENTIFIER NL* arguments?)*
+    | primary
     ;
 
 arguments
     : L_BRACKET NL* ((expression (NL* COMMA NL* expression)* NL*) |) R_BRACKET
     ;
 
+callable
+    : THIS
+    | SUPER
+    | className
+    ;
+
 primary
     : integerLiteral
     | realLiteral
-    | THIS
-    | identifier
     | bool=(TRUE | FALSE)
+    | NULL
+    ;
+
+className
+    : identifier
+    | arrayType
+    | listType
     ;
 
 integerLiteral
