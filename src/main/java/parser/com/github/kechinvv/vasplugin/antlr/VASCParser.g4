@@ -11,8 +11,8 @@ program
     ;
 
 classDeclaration
-    : CLASS NL* IDENTIFIER NL*
-      (EXTENDS NL* IDENTIFIER)? NL*
+    : CLASS NL* identifier NL*
+      (EXTENDS NL* identifier)? NL*
       IS NL* (memberDeclaration NL*)*  END NL*
     ;
 
@@ -40,15 +40,11 @@ variableDeclaration
     ;
     
 initializedVariable
-    : VAR IDENTIFIER COLON NL* expression
+    : VAR identifier COLON NL* expression
     ;
     
 uninitializedVariable
-    : VAR IDENTIFIER type
-    ;
-
-methodDeclaration
-    : METHOD IDENTIFIER NL* parameters? NL* type? NL* IS NL* body NL* END
+    : VAR identifier type
     ;
 
 parameters
@@ -58,7 +54,7 @@ parameters
     ;
 
 parameterDeclaration
-    : IDENTIFIER type
+    : identifier type
     ;
 
 body
@@ -68,6 +64,10 @@ body
 bodyStatement
     : statement
     | variableDeclaration
+    ;
+
+methodDeclaration
+    : METHOD identifier NL* parameters? NL* type? NL* IS NL* body NL* END
     ;
 
 constructorDeclaration
@@ -88,7 +88,7 @@ print
     ;
 
 assignment
-    : IDENTIFIER ASSIGN_OP NL* expression
+    : identifier ASSIGN_OP NL* expression
     ;
 
 whileLoop
@@ -104,12 +104,20 @@ returnStatement
     ;
 
 expression
-    : callable arguments? (NL* DOT IDENTIFIER NL* arguments?)*
+    : callableExpression
     | primary
     ;
 
+callableExpression
+    : callable arguments? chainExpression?
+    ;
+
+chainExpression
+    : NL* DOT callableExpression
+    ;
+
 arguments
-    : L_BRACKET NL* ((expression (NL* COMMA NL* expression)* NL*) |) R_BRACKET
+    : L_BRACKET NL* (expression (NL* COMMA NL* expression)* NL*)? R_BRACKET
     ;
 
 callable
@@ -130,7 +138,7 @@ type
     ;
     
 className
-    : IDENTIFIER
+    : identifier
     | arrayType
     | listType
     ;
@@ -141,4 +149,8 @@ integerLiteral
 
 realLiteral
    :   MINUS? DIGIT+ DOT DIGIT+
+   ;
+
+identifier
+   : IDENTIFIER
    ;

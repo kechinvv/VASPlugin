@@ -1,8 +1,8 @@
 package com.github.kechinvv.vasplugin.language
 
 
-import gen.VASCLexer
-import gen.VASCParser
+import parser.com.github.kechinvv.vasplugin.antlr.VASCLexer
+import parser.com.github.kechinvv.vasplugin.antlr.VASCParser
 import com.github.kechinvv.vasplugin.language.psi.PsiElementFactory
 import com.github.kechinvv.vasplugin.language.psi.VASPSIFileRoot
 import com.intellij.lang.ASTNode
@@ -53,7 +53,7 @@ class VASParserDefinition : ParserDefinition {
         VASCLexer.WS
     )
 
-    val STRING = TokenSet.EMPTY
+    val STRING = PSIElementTypeFactory.createTokenSet(VASLanguage, VASCLexer.STRING)
 
     override fun createLexer(project: Project?): Lexer {
         val lexer = VASCLexer(null)
