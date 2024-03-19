@@ -9,7 +9,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.kechinvv.vasplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+<!--        <toolWindow factoryClass="com.github.kechinvv.vasplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>-->
         <lang.braceMatcher
                 language="VAS"
                 implementationClass="com.github.kechinvv.vasplugin.language.VASBraceMatcher"/>
