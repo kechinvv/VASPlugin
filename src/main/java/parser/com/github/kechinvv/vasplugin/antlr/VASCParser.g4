@@ -5,15 +5,18 @@ options { tokenVocab = VASCLexer; }
 program
     :
       NL*
-      classDeclaration*
-      NL*
+      (classDeclaration semi?)*
       EOF
     ;
 
 classDeclaration
-    : CLASS NL* identifier NL*
-      (EXTENDS NL* identifier)? NL*
-      IS NL* (memberDeclaration NL*)*  END NL*
+    : CLASS NL* identifier
+      NL* (EXTENDS NL* identifier)?
+      NL* IS NL* classBody NL* END
+    ;
+
+classBody
+    : (memberDeclaration semi)*
     ;
 
 listType
@@ -25,7 +28,7 @@ arrayType
     ;
 
 genericType
-    : NL* L_SQUARE_BRACKET NL* className R_SQUARE_BRACKET NL*
+    : L_SQUARE_BRACKET NL* className NL* R_SQUARE_BRACKET
     ;
 
 memberDeclaration
@@ -44,21 +47,21 @@ initializedVariable
     ;
     
 uninitializedVariable
-    : VAR identifier type
+    : VAR identifier COLON NL* type
     ;
 
 parameters
     : L_BRACKET NL*
-      (parameterDeclaration NL* (COMMA NL* parameterDeclaration NL*)*)?
-      R_BRACKET
+      (parameter (NL* COMMA NL* parameter)*)?
+      NL* R_BRACKET
     ;
 
-parameterDeclaration
-    : identifier type
+parameter
+    : identifier  NL* COLON NL* type
     ;
 
 body
-    : (bodyStatement NL*)*
+    : (bodyStatement semi)*
     ;
 
 bodyStatement
@@ -67,7 +70,7 @@ bodyStatement
     ;
 
 methodDeclaration
-    : METHOD identifier NL* parameters? NL* type? NL* IS NL* body NL* END
+    : METHOD NL* identifier NL* parameters? NL* (COLON NL* type NL*)? IS NL* body NL* END
     ;
 
 constructorDeclaration
@@ -109,11 +112,7 @@ expression
     ;
 
 callableExpression
-    : callable arguments? chainExpression?
-    ;
-
-chainExpression
-    : NL* DOT callableExpression
+    : callable arguments? (NL* DOT callableExpression)?
     ;
 
 arguments
@@ -134,7 +133,7 @@ primary
     ;
 
 type
-    : COLON NL* className
+    : className
     ;
     
 className
@@ -154,3 +153,7 @@ realLiteral
 identifier
    : IDENTIFIER
    ;
+
+semi
+    : NL+
+    ;
