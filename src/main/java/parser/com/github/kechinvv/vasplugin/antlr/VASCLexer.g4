@@ -113,7 +113,8 @@ IDENTIFIER
 DIGIT: ('0'..'9');
 
 NL
-    : [\r\n\u000C]+
+    : '\n'
+    | '\r' '\n'?
     ;
 
 MlComment
